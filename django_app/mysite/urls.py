@@ -20,4 +20,6 @@ from blog import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.post_list),
+    # views.post_detail(pk)
+    url(r'^post/(?P<pk>\d+)/$', views.post_detail)
 ]

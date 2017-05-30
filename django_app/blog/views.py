@@ -19,3 +19,12 @@ def post_list(request):
         "posts": post
     }
     return render(request, 'blog/post_list.html', context=context)
+
+
+def post_detail(request, pk):
+    # print('post_detail_pk: ',pk)
+    post = Post.objects.get(id=pk)
+    context = {
+        "post": post
+    }
+    return render(request, 'blog/post_detail.html', context=context)
