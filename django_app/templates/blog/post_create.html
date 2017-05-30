@@ -6,10 +6,15 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 <form action="" method="POST">
+    <!-- csrf 공격을 방지하기 위해 장고에서 제공하는...? 뭐 대강 그런... -->
+    <!-- 대부분의 프레임워크에서 지원하는 기능.. 워낙 기본적인 보안 -->
+    <!-- https://ko.wikipedia.org/wiki/%EC%82%AC%EC%9D%B4%ED%8A%B8_%EA%B0%84_%EC%9A%94%EC%B2%AD_%EC%9C%84%EC%A1%B0 -->
+    {% csrf_token %}
+    <!-- POST 방식일때 name속성으로 값 받음 -->
     <div class="form-group">
-        <input name="post_title" id="post_title" type="text" placeholder="제목을 입력하세요">
+        <input class="form-control" name="post_title" type="text" placeholder="제목을 입력하세요">
     </div>
-        <textarea name="post_content" id="post_content" cols="30" rows="10"></textarea>
-        <button type="submit">작성</button>
+        <textarea class="form-control" name="post_text" cols="30" rows="10"></textarea>
+        <button type="submit" class="btn btn-default">작성</button>
 </form>
 {% endblock %}

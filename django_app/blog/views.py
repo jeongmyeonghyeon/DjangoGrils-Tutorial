@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, redirect
 from django.utils import timezone
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 from blog.models import Post
 
@@ -14,7 +16,8 @@ def post_list(request):
     # posts변수에 ORM을 사용해서 전달할 쿼리셋이
     # Post의 published_date가 timezone.now()보다
     # 작은 값을 가질때만 해당하도록 필터를 사용한다
-    post = Post.objects.filter(published_date__lte=timezone.now())
+    # post = Post.objects.filter(published_date__lte=timezone.now())
+    post = Post.objects.order_by('-created_date')
     context = {
         "title": "PostList from post_list view",
         "posts": post
@@ -32,7 +35,23 @@ def post_detail(request, pk):
 
 
 def post_create(request):
-    context = {
+    if request.method == 'GET':
+        context = {
 
-    }
-    return render(request, 'blog/post_create.html', context)
+        }
+        return render(request, 'blog/post_create.html', context)
+    elif request.method == 'POST':
+        # django.http.request.QueryDict 반환 (딕셔너리)
+        data = request.POST
+        print(data)
+        title = data['post_title']
+        text = data['post_text']
+        user = User.objects.first()
+        # post 객체 생성
+        post = Post.objects.create(
+            title=title,
+            text=text,
+            author=user
+        )
+        # return HttpResponse(post)
+        return redirect('post_detail', pk=post.pk)
