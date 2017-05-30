@@ -1,0 +1,15 @@
+<!--blog/base.html을 확장하여-->
+<!--제목 (input type text)-->
+<!--내용 (textarea)-->
+<!--작성버튼 (button)-->
+<!--을 갖는 html을 작성-->
+{% extends 'blog/base.html' %}
+{% block content %}
+<form action="" method="POST">
+    <div class="form-group">
+        <input name="post_title" id="post_title" type="text" placeholder="제목을 입력하세요">
+    </div>
+        <textarea name="post_content" id="post_content" cols="30" rows="10"></textarea>
+        <button type="submit">작성</button>
+</form>
+{% endblock %}

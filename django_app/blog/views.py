@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from blog.models import Post
 
+
 def post_list(request):
     # posts변수에 ORM을 이용해서 전체 Post의 리스트(쿼리셋)를 대입
     # post = Post.objects.all()
@@ -28,3 +29,10 @@ def post_detail(request, pk):
         "post": post
     }
     return render(request, 'blog/post_detail.html', context=context)
+
+
+def post_create(request):
+    context = {
+
+    }
+    return render(request, 'blog/post_create.html', context)
