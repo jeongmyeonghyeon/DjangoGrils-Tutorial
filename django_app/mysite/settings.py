@@ -15,10 +15,15 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print('BASE_DIR: ', BASE_DIR)
+
 # os.path.join을 사용해서 TEMPLATE_DIR변수에 django_app/templates폴더의 경로를 할당
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 print('TEMPLATES_DIR: ', TEMPLATES_DIR)
-# https://www.morethanseven.net/2009/02/11/django-settings-tip-setting-relative-paths/
+# 참고 사이트(장고 상대경로 설정): https://www.morethanseven.net/2009/02/11/django-settings-tip-setting-relative-paths/
+
+# 위와 같은 방법으로 django_app/static폴더의 경로를 STATIC_DIR에 할당
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+print('STATIC_DIR: ', STATIC_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -125,3 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# 정적파일을 모아두는 static 디렉토리를 django 설정이 아닌, 디렉토리를 새로 만들어 생성할 경우
+# 아래와 같이 설정해줘야 한다.
+# 처음 template 디렉토리를 설정해주었듯이...
+STATICFILES_DIRS = (
+    STATIC_DIR,
+)
